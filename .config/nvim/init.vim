@@ -5,6 +5,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
+set termguicolors
+set background=dark
 set number
 set relativenumber
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
@@ -89,7 +91,7 @@ Plug 'dbeniamine/cheat.sh-vim'
 " colorschemes
 Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
-
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 "
 "" Initialize plugin system
@@ -131,13 +133,18 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 let g:closetag_close_shortcut = '<leader>>'
 
-
-
-set t_Co=256
-colorscheme space-vim-dark
+"set t_Co=256
+colorscheme dracula
+"colorscheme space-vim-dark
+"colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
 
 " REMAPS
+" n - normal mode
+" nore - no recursive execution
+" map - just map lol 
+" lhs - <leader>ff is what I am going to type
+" rhs - :Telescope find_files<cr> is what is going to be executed once typed
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff :Telescope find_files<cr>
@@ -149,6 +156,10 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader>pv :Vex<CR> 
+
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
