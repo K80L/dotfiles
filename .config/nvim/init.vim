@@ -5,6 +5,10 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
+syntax on
+set nocompatible
+set termguicolors
+
 set number
 set relativenumber
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
@@ -32,6 +36,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " list of CoC extensions needed
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
+
+" Language Packs for vim
+Plug 'sheerun/vim-polyglot'
 
 "this will auto close ( [ {
 Plug 'jiangmiao/auto-pairs'
@@ -90,8 +97,22 @@ Plug 'dbeniamine/cheat.sh-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
 
+" for live grep
+Plug 'BurntSushi/ripgrep'
 
-"
+" Optional for telescope
+Plug 'nvim-telescope/telescope-fzf-native.nvim'
+Plug 'sharkdp/fd'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'kyazdani42/nvim-web-devicons'
+
+" Fugitive
+Plug 'tpope/vim-fugitive'
+
+" Black formatter
+Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+
+
 "" Initialize plugin system
 
 call plug#end()
@@ -134,8 +155,18 @@ let g:closetag_close_shortcut = '<leader>>'
 
 
 set t_Co=256
-colorscheme space-vim-dark
+" colorscheme minimalist
+" let ayucolor='dark'
+" colorscheme ayu
+colorscheme OceanicNext
+
+
+" Transparancy
 hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
+hi SignColumn guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
+
 
 " REMAPS
 
