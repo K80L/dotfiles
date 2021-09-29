@@ -6,7 +6,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 set termguicolors
-set background=dark
+"set background=dark
 set number
 set relativenumber
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
@@ -28,6 +28,9 @@ set scrolloff=8
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
+
+" Git stuffs
+Plug 'tpope/vim-fugitive'
 
 " this is for auto complete, prettier and tslinting
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -92,7 +95,10 @@ Plug 'dbeniamine/cheat.sh-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'pwntester/nautilus.nvim'
 
+" Lush
+Plug 'rktjmp/lush.nvim'
 "
 "" Initialize plugin system
 
@@ -133,11 +139,14 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 let g:closetag_close_shortcut = '<leader>>'
 
-"set t_Co=256
-colorscheme dracula
-"colorscheme space-vim-dark
-"colorscheme gruvbox
-hi Normal guibg=NONE ctermbg=NONE
+set background=dark
+" colorscheme nautilus
+" colorscheme space-vim-dark
+colorscheme OceanicNext
+
+
+"hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE
 
 " REMAPS
 " n - normal mode
@@ -160,6 +169,11 @@ nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <leader>pv :Vex<CR> 
 
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprev<CR>
+
+vnoremap <leader>p "_dP
+vnoremap <leader>y +y
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
