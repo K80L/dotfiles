@@ -31,6 +31,9 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 
+" Git stuffs
+Plug 'tpope/vim-fugitive'
+
 " this is for auto complete, prettier and tslinting
 " list of CoC extensions needed
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -103,7 +106,12 @@ Plug 'dbeniamine/cheat.sh-vim'
 " colorschemes
 Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'pwntester/nautilus.nvim'
 
+" Lush
+Plug 'rktjmp/lush.nvim'
+"
 " for live grep
 Plug 'BurntSushi/ripgrep'
 
@@ -118,7 +126,6 @@ Plug 'tpope/vim-fugitive'
 
 " Black formatter
 Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
-
 
 "" Initialize plugin system
 
@@ -159,6 +166,10 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 let g:closetag_close_shortcut = '<leader>>'
 
+set background=dark
+" colorscheme nautilus
+" colorscheme space-vim-dark
+colorscheme OceanicNext
 
 
 set t_Co=256
@@ -168,14 +179,18 @@ set t_Co=256
 colorscheme OceanicNext
 
 
-" Transparancy
+" Transparancy Set this after colorscheme
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
 hi SignColumn guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
 
-
 " REMAPS
+" n - normal mode
+" nore - no recursive execution
+" map - just map lol 
+" lhs - <leader>ff is what I am going to type
+" rhs - :Telescope find_files<cr> is what is going to be executed once typed
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff :Telescope find_files<cr>
@@ -192,6 +207,14 @@ nnoremap <C-f> :NERDTreeFind<CR>
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader>pv :Vex<CR> 
+
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprev<CR>
+
+vnoremap <leader>p "_dP
+vnoremap <leader>y +y
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
