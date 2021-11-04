@@ -14,6 +14,9 @@ set relativenumber
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
+let g:leetcode_browser='chrome'
+let g:leetcode_solution_filetype='javascript'
+
 filetype plugin indent on
 " On pressing tab, insert 2 spaces
 set expandtab
@@ -119,6 +122,9 @@ Plug 'tpope/vim-fugitive'
 
 " Black formatter
 Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+
+" leetcode
+Plug 'ianding1/leetcode.vim'
 
 "" Initialize plugin system
 
