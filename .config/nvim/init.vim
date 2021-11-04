@@ -34,14 +34,23 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 
-" Git stuffs
-Plug 'tpope/vim-fugitive'
-
 " this is for auto complete, prettier and tslinting
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 " list of CoC extensions needed
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-tsserver', {'tag': '1.3.8', 'do': 'yarn install --frozen-lockfile'} 
+Plug 'neoclide/coc-python'
+Plug 'neoclide/coc-html'
+Plug 'neoclide/coc-json'
+Plug 'neoclide/coc-prettier'
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
+
+" Typescript stuff
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
+
+" Black
+Plug 'ambv/black'
 
 " Language Packs for vim
 Plug 'sheerun/vim-polyglot'
@@ -102,12 +111,7 @@ Plug 'dbeniamine/cheat.sh-vim'
 " colorschemes
 Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'pwntester/nautilus.nvim'
 
-" Lush
-Plug 'rktjmp/lush.nvim'
-"
 " for live grep
 Plug 'BurntSushi/ripgrep'
 
@@ -122,9 +126,6 @@ Plug 'tpope/vim-fugitive'
 
 " Black formatter
 Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
-
-" leetcode
-Plug 'ianding1/leetcode.vim'
 
 "" Initialize plugin system
 
@@ -165,12 +166,8 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 let g:closetag_close_shortcut = '<leader>>'
 
-set background=dark
-" colorscheme nautilus
-" colorscheme space-vim-dark
-colorscheme OceanicNext
 
-
+set splitbelow splitright
 set t_Co=256
 " colorscheme minimalist
 " let ayucolor='dark'
@@ -178,11 +175,12 @@ set t_Co=256
 colorscheme OceanicNext
 
 
-" Transparancy Set this after colorscheme
+" Transparancy
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
 hi SignColumn guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
+
 
 " REMAPS
 " n - normal mode
@@ -191,25 +189,6 @@ hi EndOfBuffer guibg=NONE ctermbg=NONE
 " lhs - <leader>ff is what I am going to type
 " rhs - :Telescope find_files<cr> is what is going to be executed once typed
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff :Telescope find_files<cr>
-nnoremap <leader>fg :Telescope live_grep<cr>
-nnoremap <leader>fb :Telescope buffers<cr>
-nnoremap <leader>fh :Telescope help_tags<cr>
-
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
-nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
-nnoremap <leader>pv :Vex<CR> 
-
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprev<CR>
-
-vnoremap <leader>p "_dP
-vnoremap <leader>y +y
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -219,3 +198,61 @@ endfunction
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+"""""""""""""""""""""""""""""""""""""""
+" => Splits and Tabbed Files
+"""""""""""""""""""""""""""""""""""""""
+" remove w key from split navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+nnoremap <silent> <C-Left> :vertical resize -3<CR>
+nnoremap <silent> <C-Right> :vertical resize +3<CR>
+nnoremap <silent> <C-Up> :resize +3<CR>
+nnoremap <silent> <C-Down> :resize -3<CR>
+
+" change 2 split windows from horiz to vert and vice versa
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K 
+
+"""""""""""""""""""""""""""""""""""""""
+" => Telescope
+"""""""""""""""""""""""""""""""""""""""
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff :Telescope find_files<cr>
+nnoremap <leader>fg :Telescope live_grep<cr>
+nnoremap <leader>fb :Telescope buffers<cr>
+nnoremap <leader>fh :Telescope help_tags<cr>
+
+"""""""""""""""""""""""""""""""""""""""
+" => NerdTree
+"""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" open file in web browser
+nnoremap <leader>op !xdg-open %<CR>
+nnoremap <leader><CR> :source $MYVIMRC<CR>
+
+nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader>pv :Vex<CR> 
+
+" quickfix list jumping
+" nnoremap <C-j> :cnext<CR>
+" nnoremap <C-k> :cprev<CR>
+
+" I don't know what these are
+vnoremap <leader>p "_dP
+vnoremap <leader>y +y
+
+
+
