@@ -5,6 +5,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
+set hidden 
+
 syntax on
 set nocompatible
 set termguicolors
@@ -30,27 +32,35 @@ set scrolloff=8
 "  Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
 
+" for devicons
+set encoding=UTF-8
+
+" Prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" #################################################################
 " Make sure you use single quotes
+call plug#begin('~/.vim/plugged')
 
 " this is for auto complete, prettier and tslinting
 " list of CoC extensions needed
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-tsserver', {'tag': '1.3.8', 'do': 'yarn install --frozen-lockfile'} 
-Plug 'neoclide/coc-python'
-Plug 'neoclide/coc-html'
-Plug 'neoclide/coc-json'
-Plug 'neoclide/coc-prettier'
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
+
+" Prettier
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
 " Typescript stuff
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 
-" Black
+" Black formatter for Python
 Plug 'ambv/black'
+Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 
 " Language Packs for vim
 Plug 'sheerun/vim-polyglot'
@@ -85,7 +95,11 @@ Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " NerdTree
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'tsony-tsonev/nerdtree-git-plugin'
 
 " Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -102,14 +116,13 @@ Plug 'mattn/emmet-vim'
 " comment/uncomment multiple lines easily
 Plug 'tpope/vim-commentary'
 
-" surround stuff with () {} [] etc..
+" surround stuff with () {} [] '' etc..
 Plug 'tpope/vim-surround'
 
 " Language cheatsheet
 Plug 'dbeniamine/cheat.sh-vim'
 
 " colorschemes
-Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
 
 " for live grep
@@ -124,11 +137,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 " Fugitive
 Plug 'tpope/vim-fugitive'
 
-" Black formatter
-Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 
 "" Initialize plugin system
-
 call plug#end()
 
 " filenames like *.xml, *.html, *.xhtml, ...
@@ -168,12 +178,9 @@ let g:closetag_close_shortcut = '<leader>>'
 
 
 set splitbelow splitright
+set background=dark
 set t_Co=256
-" colorscheme minimalist
-" let ayucolor='dark'
-" colorscheme ayu
-colorscheme OceanicNext
-
+colorscheme onedark
 
 " Transparancy
 hi Normal guibg=NONE ctermbg=NONE
@@ -182,22 +189,75 @@ hi SignColumn guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 
-" REMAPS
+
+"REMAPS
 " n - normal mode
 " nore - no recursive execution
 " map - just map lol 
 " lhs - <leader>ff is what I am going to type
 " rhs - :Telescope find_files<cr> is what is going to be executed once typed
 
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" use <tab> for trigger completion and navigate to the next complete item
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 """""""""""""""""""""""""""""""""""""""
 " => Splits and Tabbed Files
@@ -208,10 +268,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nnoremap <silent> <C-Left> :vertical resize -3<CR>
-nnoremap <silent> <C-Right> :vertical resize +3<CR>
-nnoremap <silent> <C-Up> :resize +3<CR>
-nnoremap <silent> <C-Down> :resize -3<CR>
+nnoremap <silent> <A-Left> :vertical resize -3<CR>
+nnoremap <silent> <A-Right> :vertical resize +3<CR>
+nnoremap <silent> <A-Up> :resize +3<CR>
+nnoremap <silent> <A-Down> :resize -3<CR>
 
 " change 2 split windows from horiz to vert and vice versa
 map <Leader>th <C-w>t<C-w>H
@@ -223,6 +283,7 @@ map <Leader>tk <C-w>t<C-w>K
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff :Telescope find_files<cr>
 nnoremap <leader>fg :Telescope live_grep<cr>
+nnoremap <leader>fw :Telescope grep_string<cr>
 nnoremap <leader>fb :Telescope buffers<cr>
 nnoremap <leader>fh :Telescope help_tags<cr>
 
@@ -253,6 +314,21 @@ nnoremap <leader>pv :Vex<CR>
 " I don't know what these are
 vnoremap <leader>p "_dP
 vnoremap <leader>y +y
+"
 
+" Documentation on hover
+" Ignore errors
+function Null(error, response) abort
+endfunction
 
+augroup hover
+	autocmd!
+	autocmd CursorHold * if !coc#float#has_float()
+		\| call CocActionAsync('doHover', 'float', function('Null'))
+		\| call CocActionAsync('highlight', function('Null'))
+	\| endif
+	autocmd CursorHoldI * if CocAction('ensureDocument')
+		\|silent call CocAction('showSignatureHelp')
+	\| endif
+augroup end
 
