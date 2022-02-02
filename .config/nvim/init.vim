@@ -39,6 +39,8 @@ set encoding=UTF-8
 " Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+let g:NERDTreeGitStatusWithFlags = 1
+
 " #################################################################
 " Make sure you use single quotes
 call plug#begin('~/.vim/plugged')
@@ -97,7 +99,6 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 " NerdTree
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tsony-tsonev/nerdtree-git-plugin'
 
@@ -321,14 +322,14 @@ vnoremap <leader>y +y
 function Null(error, response) abort
 endfunction
 
-augroup hover
-	autocmd!
-	autocmd CursorHold * if !coc#float#has_float()
-		\| call CocActionAsync('doHover', 'float', function('Null'))
-		\| call CocActionAsync('highlight', function('Null'))
-	\| endif
-	autocmd CursorHoldI * if CocAction('ensureDocument')
-		\|silent call CocAction('showSignatureHelp')
-	\| endif
-augroup end
+" augroup hover
+" 	autocmd!
+" 	autocmd CursorHold * if !coc#float#has_float()
+" 		\| call CocActionAsync('doHover', 'float', function('Null'))
+" 		\| call CocActionAsync('highlight', function('Null'))
+" 	\| endif
+" 	autocmd CursorHoldI * if CocAction('ensureDocument')
+" 		\|silent call CocAction('showSignatureHelp')
+" 	\| endif
+" augroup end
 
