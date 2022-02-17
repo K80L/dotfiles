@@ -49,6 +49,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 
+" Vim diffing for code reviews
+Plug 'AndrewRadev/diffurcate.vim'
+
 " Black
 Plug 'ambv/black'
 
@@ -116,7 +119,6 @@ Plug 'joshdick/onedark.vim'
 Plug 'BurntSushi/ripgrep'
 
 " Optional for telescope
-Plug 'nvim-telescope/telescope-fzf-native.nvim'
 Plug 'sharkdp/fd'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -172,8 +174,8 @@ set t_Co=256
 " colorscheme minimalist
 " let ayucolor='dark'
 " colorscheme ayu
-colorscheme OceanicNext
-
+" colorscheme OceanicNext
+colorscheme onedark
 
 " Transparancy
 hi Normal guibg=NONE ctermbg=NONE
@@ -234,6 +236,10 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+
+
 " Remap keys for applying codeAction to the current line.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
@@ -253,6 +259,4 @@ nnoremap <leader>pv :Vex<CR>
 " I don't know what these are
 vnoremap <leader>p "_dP
 vnoremap <leader>y +y
-
-
 
