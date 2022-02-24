@@ -5,12 +5,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
-" lua stuffs
-lua require('config')
-lua << END
-require('lualine').setup()
-  options = { theme = 'gruvbox' }
-END
 
 set hidden 
 syntax on
@@ -157,7 +151,13 @@ call plug#end()
 " #######################################################################################################################################3
 
 
-lua require'colorizer'.setup()
+" lua stuffs
+lua << END
+require('config')
+require('colorizer').setup()
+require('lualine').setup()
+  options = { theme = 'gruvbox' }
+END
 
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
@@ -198,9 +198,9 @@ let g:closetag_close_shortcut = '<leader>>'
 set splitbelow splitright
 set background=dark
 set t_Co=256
-colorscheme onedark
+" colorscheme onedark
 " colorscheme gruvbox
-" colorscheme gruvbox-baby
+colorscheme gruvbox-baby
 
 " Transparancy
 hi Normal guibg=NONE ctermbg=NONE
