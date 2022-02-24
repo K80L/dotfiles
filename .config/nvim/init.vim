@@ -5,20 +5,17 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
-set hidden 
 
+set hidden 
 syntax on
 set nocompatible
 set termguicolors
-
 set number
 set relativenumber
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-
 let g:leetcode_browser='chrome'
 let g:leetcode_solution_filetype='javascript'
-
 filetype plugin indent on
 " On pressing tab, insert 2 spaces
 set expandtab
@@ -27,7 +24,6 @@ set tabstop=2
 set softtabstop=2
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2
-
 set scrolloff=8
 "  Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -41,7 +37,6 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let g:NERDTreeGitStatusWithFlags = 1
 
-" #################################################################
 " Make sure you use single quotes
 call plug#begin('~/.vim/plugged')
 
@@ -128,21 +123,41 @@ Plug 'dbeniamine/cheat.sh-vim'
 
 " colorschemes
 Plug 'joshdick/onedark.vim'
+Plug 'gruvbox-community/gruvbox'
+Plug 'luisiacc/gruvbox-baby'
 
 " for live grep
 Plug 'BurntSushi/ripgrep'
 
 " Optional for telescope
 Plug 'sharkdp/fd'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Devicons
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Fugitive
 Plug 'tpope/vim-fugitive'
 
+" Colors
+Plug 'norcalli/nvim-colorizer.lua'
+
+
+" Statusline
+Plug 'nvim-lualine/lualine.nvim'
 
 "" Initialize plugin system
 call plug#end()
+" #######################################################################################################################################3
+
+
+" lua stuffs
+lua << END
+require('config')
+require('colorizer').setup()
+require('lualine').setup()
+  options = { theme = 'gruvbox' }
+END
 
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
@@ -150,7 +165,7 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx,*.ts,*.tsx'
 
 " filenames like *.xml, *.xhtml, ...
 " This will make the list of non-closing tags self-closing in the specified files.
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
 
 " filetypes like xml, html, xhtml, ...
 " These are the file types where this plugin is enabled.
@@ -183,7 +198,9 @@ let g:closetag_close_shortcut = '<leader>>'
 set splitbelow splitright
 set background=dark
 set t_Co=256
-colorscheme onedark
+" colorscheme onedark
+" colorscheme gruvbox
+colorscheme gruvbox-baby
 
 " Transparancy
 hi Normal guibg=NONE ctermbg=NONE
@@ -328,6 +345,43 @@ vnoremap <leader>y +y
 function Null(error, response) abort
 endfunction
 
+" ThePrimagen stuffs
+" let g:theprimeagen_colorscheme = "gruvbox"
+" fun! ColorMyPencils()
+"     let g:gruvbox_contrast_dark = 'hard'
+"     if exists('+termguicolors')
+"         let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"         let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"     endif
+"     let g:gruvbox_invert_selection='0'
+
+"     set background=dark
+"     if has('nvim')
+"         call luaeval('vim.cmd("colorscheme " .. _A[1])', [g:theprimeagen_colorscheme])
+"     else
+"         " TODO: What the way to use g:theprimeagen_colorscheme
+"         colorscheme gruvbox
+"     endif
+
+"     highlight ColorColumn ctermbg=0 guibg=grey
+"     hi SignColumn guibg=none
+"     hi CursorLineNR guibg=None
+"     highlight Normal guibg=none
+"     " highlight LineNr guifg=#ff8659
+"     " highlight LineNr guifg=#aed75f
+"     highlight LineNr guifg=#5eacd3
+"     highlight netrwDir guifg=#5eacd3
+"     highlight qfFileName guifg=#aed75f
+"     hi TelescopeBorder guifg=#5eacd
+" endfun
+" call ColorMyPencils()
+
+" " Vim with me
+" nnoremap <leader>cmp :call ColorMyPencils()<CR>
+" nnoremap <leader>vwb :let g:theprimeagen_colorscheme =
+" End ThePrimagen
+
+
 " augroup hover
 " 	autocmd!
 " 	autocmd CursorHold * if !coc#float#has_float()
@@ -338,4 +392,3 @@ endfunction
 " 		\|silent call CocAction('showSignatureHelp')
 " 	\| endif
 " augroup end
-
