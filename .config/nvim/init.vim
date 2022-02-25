@@ -5,7 +5,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
-
 set hidden 
 syntax on
 set nocompatible
@@ -46,9 +45,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
 
 " Prettier
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install --frozen-lockfile --production',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 
 " Typescript stuff
 Plug 'pangloss/vim-javascript'
@@ -142,7 +139,6 @@ Plug 'tpope/vim-fugitive'
 " Colors
 Plug 'norcalli/nvim-colorizer.lua'
 
-
 " Statusline
 Plug 'nvim-lualine/lualine.nvim'
 
@@ -199,8 +195,8 @@ set splitbelow splitright
 set background=dark
 set t_Co=256
 " colorscheme onedark
-" colorscheme gruvbox
-colorscheme gruvbox-baby
+colorscheme gruvbox
+" colorscheme gruvbox-baby
 
 " Transparancy
 hi Normal guibg=NONE ctermbg=NONE
