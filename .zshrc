@@ -7,7 +7,8 @@ export ZSH="/Users/kevintly1/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="dracula"
+# ZSH_THEME="dracula"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -76,9 +77,14 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+#The first one checks what is staged vs the current branch, the others check the current branch vs main or master.
+alias diffstaged="git diff --staged | nvim - +Diffurcate '+Telescope find_files'"
+alias diffmain="git diff main.. | nvim - +Diffurcate '+Telescope find_files'"
+alias diffmaster="git diff master.. | nvim - +Diffurcate '+Telescope find_files'"
+
 alias vim="nvim"
 alias vi="nvim"
-alias oldvim="vim"io
+alias oldvim="vim"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export PATH=/usr/local/bin:$PATH

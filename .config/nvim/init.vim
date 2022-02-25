@@ -5,7 +5,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
-
 set hidden 
 syntax on
 set nocompatible
@@ -37,8 +36,6 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let g:NERDTreeGitStatusWithFlags = 1
 
-
-" ################################################################################################################################
 " Make sure you use single quotes
 call plug#begin('~/.vim/plugged')
 
@@ -48,14 +45,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
 
 " Prettier
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install --frozen-lockfile --production',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 
 " Typescript stuff
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
+
+" Vim diffing for code reviews
+Plug 'AndrewRadev/diffurcate.vim'
 
 " Black formatter for Python
 Plug 'ambv/black'
@@ -129,7 +127,6 @@ Plug 'luisiacc/gruvbox-baby'
 Plug 'BurntSushi/ripgrep'
 
 " Optional for telescope
-Plug 'nvim-telescope/telescope-fzf-native.nvim'
 Plug 'sharkdp/fd'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -141,7 +138,6 @@ Plug 'tpope/vim-fugitive'
 
 " Colors
 Plug 'norcalli/nvim-colorizer.lua'
-
 
 " Statusline
 Plug 'nvim-lualine/lualine.nvim'
@@ -199,8 +195,8 @@ set splitbelow splitright
 set background=dark
 set t_Co=256
 " colorscheme onedark
-" colorscheme gruvbox
-colorscheme gruvbox-baby
+colorscheme gruvbox
+" colorscheme gruvbox-baby
 
 " Transparancy
 hi Normal guibg=NONE ctermbg=NONE
@@ -315,6 +311,10 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+
+
 " Remap keys for applying codeAction to the current line.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
@@ -340,9 +340,6 @@ vnoremap <leader>y +y
 " Ignore errors
 function Null(error, response) abort
 endfunction
-
-
-
 
 " ThePrimagen stuffs
 " let g:theprimeagen_colorscheme = "gruvbox"
