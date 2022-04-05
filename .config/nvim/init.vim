@@ -35,6 +35,21 @@ set encoding=UTF-8
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let g:NERDTreeGitStatusWithFlags = 1
+let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.js, *.ts, *.html, *.css, *.jsx, *.tsx
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
 
 " Make sure you use single quotes
 call plug#begin('~/.vim/plugged')
@@ -56,8 +71,8 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'AndrewRadev/diffurcate.vim'
 
 " Black formatter for Python
-Plug 'ambv/black'
 Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'psf/black', { 'branch': 'stable' }
 
 " Language Packs for vim
 Plug 'sheerun/vim-polyglot'
