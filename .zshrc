@@ -1,19 +1,20 @@
-# .zshrc is for interactive shell configuration. You set options for the interactive shell there with the setopt and unsetopt commands. You can also load shell modules, set your history options, change your prompt, set up zle and completion, et cetera. You also set any variables that are only used in the interactive shell (e.g. $LS_COLORS).
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/kevintly1/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="dracula"
-ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
+ZSH_THEME="robbyrussell"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line if pasting URLs and other text is messed up.
@@ -49,8 +50,9 @@ plugins=(git vi-mode)
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -77,17 +79,23 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#The first one checks what is staged vs the current branch, the others check the current branch vs main or master.
-alias diffstaged="git diff --staged | nvim - +Diffurcate '+Telescope find_files'"
-alias diffmain="git diff main.. | nvim - +Diffurcate '+Telescope find_files'"
-alias diffmaster="git diff master.. | nvim - +Diffurcate '+Telescope find_files'"
-
 alias vim="nvim"
 alias vi="nvim"
-alias oldvim="vim"
+alias oldvim="vim"io
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export PATH=/usr/local/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
+reboot() {
+    docker-compose up -d $@ && docker attach $@
+}
+
+orphans() {
+    docker-compose -f docker-compose.yml down -v --remove-orphans
+}
+
+rebuild() {
+    docker-compose -f docker-compose.yml build --build-arg DEV="True"
+}
