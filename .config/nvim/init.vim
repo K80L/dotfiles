@@ -39,17 +39,17 @@ let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
 
 au BufNewFile,BufRead *.py
     \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+    \| set softtabstop=4
+    \| set shiftwidth=4
+    \| set textwidth=79
+    \| set expandtab
+    \| set autoindent
+    \| set fileformat=unix
 
-au BufNewFile,BufRead *.js, *.ts, *.html, *.css, *.jsx, *.tsx
+au BufNewFile,BufRead *.js,*.ts,*.html,*.css,*.jsx,*.tsx
     \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+    \| set softtabstop=2
+    \| set shiftwidth=2
 
 " Make sure you use single quotes
 call plug#begin('~/.vim/plugged')
@@ -57,7 +57,16 @@ call plug#begin('~/.vim/plugged')
 " this is for auto complete, prettier and tslinting
 " list of CoC extensions needed
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
+let g:coc_global_extensions = [
+    \ 'coc-tslint-plugin',
+    \ 'coc-tsserver',
+    \ 'coc-css',
+    \ 'coc-html',
+    \ 'coc-json',
+    \ 'coc-prettier',
+    \ 'coc-pyright',
+    \ 'coc-word',
+    \ 'coc-snippets']
 
 " Prettier
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
@@ -403,3 +412,4 @@ endfunction
 " 		\|silent call CocAction('showSignatureHelp')
 " 	\| endif
 " augroup end
+"
