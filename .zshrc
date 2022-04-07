@@ -99,3 +99,7 @@ orphans() {
 rebuild() {
     docker-compose -f docker-compose.yml build --build-arg DEV="True"
 }
+
+activatenvim() {
+    source ~/.local/venv/nvim/bin/activate 
+}

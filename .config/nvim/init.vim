@@ -5,6 +5,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
+
+" DEFAULT SETTINGS
 set hidden 
 syntax on
 set nocompatible
@@ -24,21 +26,24 @@ set softtabstop=2
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2
 set scrolloff=8
+set encoding=UTF-8
+
+
 "  Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 
-" for devicons
-set encoding=UTF-8
 
 " Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+
 let g:NERDTreeGitStatusWithFlags = 1
 let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
 
+
 au BufNewFile,BufRead *.py
-    \ set tabstop=4
+    \| set tabstop=4
     \| set softtabstop=4
     \| set shiftwidth=4
     \| set textwidth=79
@@ -47,9 +52,10 @@ au BufNewFile,BufRead *.py
     \| set fileformat=unix
 
 au BufNewFile,BufRead *.js,*.ts,*.html,*.css,*.jsx,*.tsx
-    \ set tabstop=2
+    \| set tabstop=2
     \| set softtabstop=2
     \| set shiftwidth=2
+
 
 " Make sure you use single quotes
 call plug#begin('~/.vim/plugged')
@@ -227,8 +233,6 @@ hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
 hi SignColumn guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
-
-
 
 "REMAPS
 " n - normal mode
