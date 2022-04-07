@@ -89,6 +89,8 @@ Plug 'AndrewRadev/diffurcate.vim'
 Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'psf/black', { 'branch': 'stable' }
 
+" Plug 'vim-syntastic/syntastic'
+
 " Language Packs for vim
 Plug 'sheerun/vim-polyglot'
 
@@ -244,6 +246,8 @@ hi EndOfBuffer guibg=NONE ctermbg=NONE
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
+nnoremap <leader>n :noh<CR>
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -334,7 +338,7 @@ nnoremap <leader>fh :Telescope help_tags<cr>
 """""""""""""""""""""""""""""""""""""""
 " => NerdTree
 """""""""""""""""""""""""""""""""""""""
-nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>t :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
@@ -368,6 +372,20 @@ vnoremap <leader>y +y
 " Ignore errors
 function Null(error, response) abort
 endfunction
+
+" vim-syntastic 
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" end vim-syntastic
+
+
+
 
 " ThePrimagen stuffs
 " let g:theprimeagen_colorscheme = "gruvbox"
