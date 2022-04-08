@@ -72,7 +72,8 @@ let g:coc_global_extensions = [
     \ 'coc-prettier',
     \ 'coc-pyright',
     \ 'coc-word',
-    \ 'coc-snippets']
+    \ 'coc-snippets',
+    \ 'coc-rust-analyzer']
 
 " Prettier
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
@@ -171,6 +172,9 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 " Statusline
 Plug 'nvim-lualine/lualine.nvim'
+
+" Rust
+Plug 'rust-lang/rust.vim'
 
 "" Initialize plugin system
 call plug#end()
