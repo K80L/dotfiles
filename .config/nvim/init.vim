@@ -377,6 +377,9 @@ vnoremap <leader>y +y
 function Null(error, response) abort
 endfunction
 
+" skeletons
+autocmd BufNewFile *.tsx 0r ~/.config/nvim/skeletons/react-typescript.tsx
+
 " vim-syntastic 
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
