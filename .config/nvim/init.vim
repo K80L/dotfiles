@@ -51,10 +51,10 @@ au BufNewFile,BufRead *.py
     \| set autoindent
     \| set fileformat=unix
 
-au BufNewFile,BufRead *.js,*.ts,*.html,*.css,*.jsx,*.tsx
-    \| set tabstop=2
-    \| set softtabstop=2
-    \| set shiftwidth=2
+" au BufNewFile,BufRead *.js,*.ts,*.html,*.css,*.jsx,*.tsx
+"     \| set tabstop=2
+"     \| set softtabstop=2
+"     \| set shiftwidth=2
 
 
 " Make sure you use single quotes
@@ -377,8 +377,8 @@ vnoremap <leader>y +y
 function Null(error, response) abort
 endfunction
 
-" skeletons
-autocmd BufNewFile *.tsx 0r ~/.config/nvim/skeletons/react-typescript.tsx
+" skeletons :read ~/.config/nvim/skeletons/react-typescript.tsx
+" autocmd BufNewFile *.tsx 0r ~/.config/nvim/skeletons/react-typescript.tsx
 
 " vim-syntastic 
 " set statusline+=%#warningmsg#
