@@ -64,7 +64,7 @@ call plug#begin('~/.vim/plugged')
 " list of CoC extensions needed
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
-    \ 'coc-tslint-plugin',
+    \ 'coc-eslint',
     \ 'coc-tsserver',
     \ 'coc-css',
     \ 'coc-html',
