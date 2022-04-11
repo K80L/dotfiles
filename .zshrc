@@ -103,3 +103,9 @@ rebuild() {
 activatenvim() {
     source ~/.local/venv/nvim/bin/activate 
 }
+
+# Created by `pipx` on 2022-04-08 18:31:14
+export PATH="$PATH:/Users/kev-geosite/.local/bin"
+eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"

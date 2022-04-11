@@ -57,6 +57,8 @@ au BufNewFile,BufRead *.js,*.ts,*.html,*.css,*.jsx,*.tsx
     \| set shiftwidth=2
 
 
+au FileType python let b:coc_root_patterns = ['.git', '.env']
+
 " Make sure you use single quotes
 call plug#begin('~/.vim/plugged')
 

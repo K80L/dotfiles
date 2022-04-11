@@ -10,6 +10,10 @@
     "typescriptreact",
     "typescript.tsx"
   ],
+  "coc.preferences.rootPatterns": [
+    ".git",
+    ".env"
+  ],
   "prettier.semi": true,
   "prettier.useTabs": false,
   "prettier.tabWidth": 2
