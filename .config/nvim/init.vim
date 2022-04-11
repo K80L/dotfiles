@@ -51,10 +51,10 @@ au BufNewFile,BufRead *.py
     \| set autoindent
     \| set fileformat=unix
 
-au BufNewFile,BufRead *.js,*.ts,*.html,*.css,*.jsx,*.tsx
-    \| set tabstop=2
-    \| set softtabstop=2
-    \| set shiftwidth=2
+" au BufNewFile,BufRead *.js,*.ts,*.html,*.css,*.jsx,*.tsx
+"     \| set tabstop=2
+"     \| set softtabstop=2
+"     \| set shiftwidth=2
 
 
 au FileType python let b:coc_root_patterns = ['.git', '.env']
@@ -66,7 +66,7 @@ call plug#begin('~/.vim/plugged')
 " list of CoC extensions needed
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
-    \ 'coc-tslint-plugin',
+    \ 'coc-eslint',
     \ 'coc-tsserver',
     \ 'coc-css',
     \ 'coc-html',
@@ -74,7 +74,8 @@ let g:coc_global_extensions = [
     \ 'coc-prettier',
     \ 'coc-pyright',
     \ 'coc-word',
-    \ 'coc-snippets']
+    \ 'coc-snippets',
+    \ 'coc-rust-analyzer']
 
 " Prettier
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
@@ -175,6 +176,9 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 " Statusline
 Plug 'nvim-lualine/lualine.nvim'
+
+" Rust
+Plug 'rust-lang/rust.vim'
 
 "" Initialize plugin system
 call plug#end()
@@ -374,6 +378,9 @@ vnoremap <leader>y +y
 " Ignore errors
 function Null(error, response) abort
 endfunction
+
+" skeletons :read ~/.config/nvim/skeletons/react-typescript.tsx
+" autocmd BufNewFile *.tsx 0r ~/.config/nvim/skeletons/react-typescript.tsx
 
 " vim-syntastic 
 " set statusline+=%#warningmsg#
