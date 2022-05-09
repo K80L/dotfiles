@@ -15,9 +15,17 @@ set number
 set relativenumber
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-let g:leetcode_browser='chrome'
-let g:leetcode_solution_filetype='javascript'
-filetype plugin indent on
+filetype on " detect files based on type
+filetype plugin on " when a file is edited, its plugin file is loaded (if there is one)
+filetype indent on " maintain indentation
+
+" Enable autocompletion
+set omnifunc=syntaxcomplete#Complete
+setlocal omnifunc=go#complete#Complete
+
+" Select keyword as you type
+set completeopt=longest,menuone
+
 " On pressing tab, insert 2 spaces
 set expandtab
 " show existing tab with 2 spaces width
@@ -28,6 +36,7 @@ set shiftwidth=2
 set scrolloff=8
 set encoding=UTF-8
 
+" let g:go_bin_path = $HOME."/go/bin"
 
 "  Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -59,6 +68,7 @@ au BufNewFile,BufRead *.py
 
 au FileType python let b:coc_root_patterns = ['.git', '.env']
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make sure you use single quotes
 call plug#begin('~/.vim/plugged')
 
@@ -87,12 +97,6 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 
 " Vim diffing for code reviews
 Plug 'AndrewRadev/diffurcate.vim'
-
-" Black formatter for Python
-Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'psf/black', { 'branch': 'stable' }
-
-" Plug 'vim-syntastic/syntastic'
 
 " Language Packs for vim
 Plug 'sheerun/vim-polyglot'
@@ -185,13 +189,6 @@ call plug#end()
 " #######################################################################################################################################3
 
 
-" lua stuffs
-lua << END
-require('config')
-require('colorizer').setup()
-require('lualine').setup()
-  options = { theme = 'gruvbox' }
-END
 
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
@@ -350,8 +347,11 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gr <Plug>(coc-references)
+nmap <leader>gi <Plug>(coc-implementation)
 
+let g:go_def_mapping_enabled = 0
 
 " Remap keys for applying codeAction to the current line.
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -395,44 +395,6 @@ endfunction
 
 
 
-
-" ThePrimagen stuffs
-" let g:theprimeagen_colorscheme = "gruvbox"
-" fun! ColorMyPencils()
-"     let g:gruvbox_contrast_dark = 'hard'
-"     if exists('+termguicolors')
-"         let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"         let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"     endif
-"     let g:gruvbox_invert_selection='0'
-
-"     set background=dark
-"     if has('nvim')
-"         call luaeval('vim.cmd("colorscheme " .. _A[1])', [g:theprimeagen_colorscheme])
-"     else
-"         " TODO: What the way to use g:theprimeagen_colorscheme
-"         colorscheme gruvbox
-"     endif
-
-"     highlight ColorColumn ctermbg=0 guibg=grey
-"     hi SignColumn guibg=none
-"     hi CursorLineNR guibg=None
-"     highlight Normal guibg=none
-"     " highlight LineNr guifg=#ff8659
-"     " highlight LineNr guifg=#aed75f
-"     highlight LineNr guifg=#5eacd3
-"     highlight netrwDir guifg=#5eacd3
-"     highlight qfFileName guifg=#aed75f
-"     hi TelescopeBorder guifg=#5eacd
-" endfun
-" call ColorMyPencils()
-
-" " Vim with me
-" nnoremap <leader>cmp :call ColorMyPencils()<CR>
-" nnoremap <leader>vwb :let g:theprimeagen_colorscheme =
-" End ThePrimagen
-
-
 " augroup hover
 " 	autocmd!
 " 	autocmd CursorHold * if !coc#float#has_float()
@@ -443,4 +405,14 @@ endfunction
 " 		\|silent call CocAction('showSignatureHelp')
 " 	\| endif
 " augroup end
-"
+
+
+
+" lua stuffs "
+lua << EOF
+require('config')
+require('colorizer').setup()
+require('lualine').setup()
+  options = { theme = 'gruvbox' }
+require('telescope').setup{}
+EOF

@@ -16,5 +16,12 @@
   ],
   "prettier.semi": true,
   "prettier.useTabs": false,
-  "prettier.tabWidth": 2
+  "prettier.tabWidth": 2,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
+  }
 }
