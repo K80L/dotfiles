@@ -113,10 +113,10 @@ activatenvim() {
 }
 
 # Created by `pipx` on 2022-04-08 18:31:14
-export PATH="$PATH:/Users/kev-geosite/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 eval "$(pyenv init -)"
 export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-export GOBIN="/Users/kevintly1/go/bin"
-export GOPATH="/Users/kevintly1/go"
-export PATH="$PATH:/Users/kevintly1/go/bin"
+export GOBIN="$HOME/go/bin"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$HOME/go/bin"
