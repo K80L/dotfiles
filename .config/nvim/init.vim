@@ -45,10 +45,13 @@ set encoding=UTF-8
 
 " Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 
 let g:NERDTreeGitStatusWithFlags = 1
 let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
+
 
 
 au BufNewFile,BufRead *.py
@@ -67,6 +70,8 @@ au BufNewFile,BufRead *.py
 
 
 au FileType python let b:coc_root_patterns = ['.git', '.env']
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make sure you use single quotes
@@ -87,8 +92,8 @@ let g:coc_global_extensions = [
     \ 'coc-snippets',
     \ 'coc-rust-analyzer']
 
-" Prettier
-Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+" Prettier Maybe we don't want this...
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 
 " Typescript stuff
 Plug 'pangloss/vim-javascript'
@@ -171,7 +176,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Devicons
 Plug 'kyazdani42/nvim-web-devicons'
-
+Plug 'ryanoasis/vim-devicons'
 " Fugitive
 Plug 'tpope/vim-fugitive'
 
@@ -183,6 +188,15 @@ Plug 'nvim-lualine/lualine.nvim'
 
 " Rust
 Plug 'rust-lang/rust.vim'
+
+" Asynchronous Linting Engine
+Plug 'dense-analysis/ale'
+
+" JsDoc
+Plug 'heavenshell/vim-jsdoc', {
+  \ 'for': ['javascript', 'javascript.jsx','typescript'],
+  \ 'do': 'make install'
+\}
 
 "" Initialize plugin system
 call plug#end()

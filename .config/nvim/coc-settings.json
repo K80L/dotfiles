@@ -1,6 +1,7 @@
 {
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
+  "prettier.enable": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "markdown",
@@ -8,7 +9,9 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "typescript.tsx"
+    "typescript.tsx",
+    "json",
+    "graphql"
   ],
   "coc.preferences.rootPatterns": [
     ".git",
@@ -17,6 +20,7 @@
   "prettier.semi": true,
   "prettier.useTabs": false,
   "prettier.tabWidth": 2,
+  "eslint.autoFixOnSave": true,
   "languageserver": {
     "golang": {
       "command": "gopls",
