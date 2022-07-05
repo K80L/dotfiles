@@ -36,7 +36,6 @@ set shiftwidth=2
 set scrolloff=8
 set encoding=UTF-8
 
-" let g:go_bin_path = $HOME."/go/bin"
 
 "  Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -44,7 +43,7 @@ set encoding=UTF-8
 
 
 " Prettier
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
@@ -87,10 +86,7 @@ let g:coc_global_extensions = [
     \ 'coc-html',
     \ 'coc-json',
     \ 'coc-prettier',
-    \ 'coc-pyright',
-    \ 'coc-word',
-    \ 'coc-snippets',
-    \ 'coc-rust-analyzer']
+    \ 'coc-word']
 
 " Prettier Maybe we don't want this...
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
@@ -128,9 +124,6 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " Using a non-default branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
 
 " Plugin options
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
@@ -185,9 +178,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 " Statusline
 Plug 'nvim-lualine/lualine.nvim'
-
-" Rust
-Plug 'rust-lang/rust.vim'
 
 " Asynchronous Linting Engine
 Plug 'dense-analysis/ale'

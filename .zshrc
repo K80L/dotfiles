@@ -22,7 +22,8 @@ export ZSH="${HOME}/.oh-my-zsh"
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 #ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line if pasting URLs and other text is messed up.
@@ -36,7 +37,12 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(
+    git
+    vi-mode
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+)
 
 # User configuration
 
@@ -61,28 +67,14 @@ plugins=(git vi-mode)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 # NVM SETUP
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-
-source ~/.cargo/env
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 export PATH=/opt/homebrew/bin:$PATH
 
@@ -97,24 +89,14 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 alias vim="nvim"
 alias vi="nvim"
-alias oldvim="vim"io
+alias oldvim="vim"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+eval $(thefuck --alias)
 
 export PATH=/usr/local/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
-
-reboot() {
-    docker-compose up -d $@ && docker attach $@
-}
-
-orphans() {
-    docker-compose -f docker-compose.yml down -v --remove-orphans
-}
-
-rebuild() {
-    docker-compose -f docker-compose.yml build --build-arg DEV="True"
-}
 
 activatenvim() {
     source ~/.local/venv/nvim/bin/activate 
@@ -122,12 +104,8 @@ activatenvim() {
 
 # Created by `pipx` on 2022-04-08 18:31:14
 export PATH="$PATH:$HOME/.local/bin"
-eval "$(pyenv init -)"
 export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-export GOBIN="$HOME/go/bin"
-export GOPATH="$HOME/go"
-export PATH="$PATH:$HOME/go/bin"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
