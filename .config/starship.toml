@@ -1,3 +1,12 @@
+add_newline = false
+
+# disables line break making the prompt a single line
+[line_break]
+disabled = true
+
+[memory_usage]
+disabled = false
+
 [bun]
 format = "via [$symbol]($style)"
 

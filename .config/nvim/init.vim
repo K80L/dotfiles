@@ -35,6 +35,9 @@ set softtabstop=2
 set shiftwidth=2
 set scrolloff=8
 set encoding=UTF-8
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 
 "  Specify a directory for plugins
@@ -255,11 +258,6 @@ hi EndOfBuffer guibg=NONE ctermbg=NONE
 " other plugin before putting this into your config.
 nnoremap <leader>n :noh<CR>
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -273,10 +271,47 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+" 9-9-22
+" coc.nvim switched to a custom popup menu from 0.0.82
+" you have to change key-mapping of <cr> to make it work.
+" checkout current key-mapping by ":verbose imap <cr>"
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" 9-9-22
+" coc.nvim switched to a custom popup menu from 0.0.82
+" you have to change key-mapping of <tab> to make it work.
+" checkout current key-mapping by ":verbose imap <tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" 9-9-22
+" coc.nvim switched to a custom popup menu from 0.0.82
+" you have to change key-mapping of <cr> to make it work.
+" checkout current key-mapping by ":verbose imap <cr>"
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <C-x><C-z> coc#pum#visible() ? coc#pum#stop() : "\<C-x>\<C-z>"
+" remap for complete to use tab and <cr>
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1):
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" hi CocSearch ctermfg=12 guifg=#18A3FF
+" hi CocMenuSel ctermbg=109 guibg=#13354A
+
+
+
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -308,8 +343,6 @@ endfunction
 "   return !col || getline('.')[col - 1]  =~ '\s'
 " endfunction
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)

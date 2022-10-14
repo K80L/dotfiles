@@ -16,5 +16,5 @@
     ".git",
     ".env"
   ],
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": false
 }
