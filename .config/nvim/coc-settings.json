@@ -1,20 +1,12 @@
 {
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "markdown",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx",
-    "json",
-    "graphql"
-  ],
-  "coc.preferences.rootPatterns": [
-    ".git",
-    ".env"
-  ],
-  "eslint.autoFixOnSave": false
+  "coc.preferences.formatOnSave": true,
+  "suggest.enablePreselect": false,
+  "suggest.noselect": true,
+  "prettier.resolveGlobalModules": true,
+  "workspace.rootPatterns": [".git", ".env"],
+  "eslint.autoFixOnSave": false,
+  "tsserver.enable": true,
+  "tsserver.disableAutomaticTypeAcquisition": false
 }

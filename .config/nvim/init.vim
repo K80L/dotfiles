@@ -275,22 +275,6 @@ endif
 " coc.nvim switched to a custom popup menu from 0.0.82
 " you have to change key-mapping of <cr> to make it work.
 " checkout current key-mapping by ":verbose imap <cr>"
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" 9-9-22
-" coc.nvim switched to a custom popup menu from 0.0.82
-" you have to change key-mapping of <tab> to make it work.
-" checkout current key-mapping by ":verbose imap <tab>"
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" 9-9-22
-" coc.nvim switched to a custom popup menu from 0.0.82
-" you have to change key-mapping of <cr> to make it work.
-" checkout current key-mapping by ":verbose imap <cr>"
 " inoremap <silent><expr> <TAB>
 "       \ pumvisible() ? "\<C-n>" :
 "       \ <SID>check_back_space() ? "\<TAB>" :
@@ -305,7 +289,7 @@ inoremap <silent><expr> <TAB>
     \ <SID>check_back_space() ? "\<Tab>" :
     \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <C-Space> coc#refresh()
 
 " hi CocSearch ctermfg=12 guifg=#18A3FF
 " hi CocMenuSel ctermbg=109 guibg=#13354A
@@ -383,11 +367,6 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>gi <Plug>(coc-implementation)
-
 let g:go_def_mapping_enabled = 0
 
 " Remap keys for applying codeAction to the current line.
@@ -397,12 +376,15 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 " open file in web browser
 nnoremap <leader>op !xdg-open %<CR>
-nnoremap <leader><CR> :source $MYVIMRC<CR>
 
+" source init.vim file
+" nnoremap <leader><CR> :source $MYVIMRC<CR>
 nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
+
+" vertical split and open file explore
 nnoremap <leader>pv :Vex<CR> 
 
-" quickfix list jumping
+" quickfix list jumping. not used as this interferes with split navigation
 " nnoremap <C-j> :cnext<CR>
 " nnoremap <C-k> :cprev<CR>
 
@@ -410,6 +392,9 @@ nnoremap <leader>pv :Vex<CR>
 vnoremap <leader>p "_dP
 vnoremap <leader>y +y
 "
+
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
 
 " Documentation on hover
 " Ignore errors
