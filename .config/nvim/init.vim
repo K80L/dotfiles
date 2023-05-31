@@ -48,7 +48,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 
 let g:NERDTreeGitStatusWithFlags = 1
-let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
+" let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
 
 
 au BufNewFile,BufRead *.py
@@ -66,7 +66,7 @@ au BufNewFile,BufRead *.py
 "     \| set shiftwidth=2
 
 
-au FileType python let b:coc_root_patterns = ['.git', '.env']
+" au FileType python let b:coc_root_patterns = ['.git', '.env']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make sure you use single quotes
@@ -75,17 +75,6 @@ call plug#begin('~/.vim/plugged')
 " this is for auto complete, prettier and tslinting
 " list of CoC extensions needed
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [
-    \ 'coc-eslint',
-    \ 'coc-tsserver',
-    \ 'coc-css',
-    \ 'coc-html',
-    \ 'coc-json',
-    \ 'coc-prettier',
-    \ 'coc-pyright',
-    \ 'coc-word',
-    \ 'coc-snippets',
-    \ 'coc-rust-analyzer']
 
 " Prettier
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
@@ -127,9 +116,6 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 Plug 'fatih/vim-go', { 'tag': '*' }
 
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
 " NerdTree
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -146,7 +132,7 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'alvan/vim-closetag'
 
 " emmet
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 
 " comment/uncomment multiple lines easily
 Plug 'tpope/vim-commentary'
@@ -155,12 +141,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
 " Language cheatsheet
-Plug 'dbeniamine/cheat.sh-vim'
+" Plug 'dbeniamine/cheat.sh-vim'
 
 " colorschemes
 Plug 'joshdick/onedark.vim'
 Plug 'gruvbox-community/gruvbox'
-Plug 'luisiacc/gruvbox-baby'
 
 " for live grep
 Plug 'BurntSushi/ripgrep'
@@ -182,12 +167,26 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'nvim-lualine/lualine.nvim'
 
 " Rust
-Plug 'rust-lang/rust.vim'
+" Plug 'rust-lang/rust.vim'
 
+" ChatGPT
+Plug 'MunifTanjim/nui.nvim'
+Plug 'jackMort/ChatGPT.nvim'
 "" Initialize plugin system
 call plug#end()
 " #######################################################################################################################################3
 
+" coc extensions to install
+let g:coc_global_extensions = [
+    \ 'coc-eslint',
+    \ 'coc-tsserver',
+    \ 'coc-css',
+    \ 'coc-html',
+    \ 'coc-json',
+    \ 'coc-prettier',
+    \ 'coc-word',
+    \ 'coc-snippets',
+    \ 'coc-vimlsp',]
 
 
 " filenames like *.xml, *.html, *.xhtml, ...
@@ -215,7 +214,7 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_regions = {
     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
     \ 'javascript.jsx': 'jsxRegion',
-    \ 'ypescriptreact': 'jsxRegion,tsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
     \ 'javascriptreact': 'jsxRegion',
     \ }
 
@@ -246,32 +245,33 @@ hi EndOfBuffer guibg=NONE ctermbg=NONE
 " lhs - <leader>ff is what I am going to type
 " rhs - :Telescope find_files<cr> is what is going to be executed once typed
 
+" unhighlight current search word
+nnoremap <leader>n :noh<CR>
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-nnoremap <leader>n :noh<CR>
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1):
+    \ <SID>CheckBackspace() ? "\<Tab>" :
+    \ coc#refresh()
+
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
+" Use <C-@> on vim
+inoremap <silent><expr> <c-@> coc#refresh()
+
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -297,15 +297,6 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
-" use <tab> for trigger completion and navigate to the next complete item
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -360,18 +351,17 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 " open file in web browser
 nnoremap <leader>op !xdg-open %<CR>
-nnoremap <leader><CR> :source $MYVIMRC<CR>
 
 nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <leader>pv :Vex<CR> 
 
-" quickfix list jumping
+" quickfix list jumping not used b/c interferes with splits
 " nnoremap <C-j> :cnext<CR>
 " nnoremap <C-k> :cprev<CR>
 
 " I don't know what these are
-vnoremap <leader>p "_dP
-vnoremap <leader>y +y
+" vnoremap <leader>p "_dP
+" vnoremap <leader>y +y
 "
 
 " Documentation on hover
@@ -415,4 +405,9 @@ require('colorizer').setup()
 require('lualine').setup()
   options = { theme = 'gruvbox' }
 require('telescope').setup{}
+EOF
+lua << EOF
+require('chatgpt').setup({
+  api_key_cmd = 'op read op://dev/ChatGPT API Key/credential --no-newline'
+})
 EOF
