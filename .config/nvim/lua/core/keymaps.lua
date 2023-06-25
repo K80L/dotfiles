@@ -39,3 +39,5 @@ vim.keymap.set('n', '<silent> <A-Left>', ':vertical resize -3<CR>')
 vim.keymap.set('n', '<silent> <A-Right>', ':vertical resize +3<CR>')
 vim.keymap.set('n', '<silent> <A-Up>', ':resize +3<CR>')
 vim.keymap.set('n', '<silent> <A-Down>', ':resize -3<CR>')
+
+
