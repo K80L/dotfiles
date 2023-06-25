@@ -37,6 +37,7 @@ plugins=(git vi-mode)
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+export EDITOR='/opt/homebrew/bin/nvim'
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -112,6 +113,9 @@ activatenvim() {
     source ~/.local/venv/nvim/bin/activate 
 }
 
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
+
 # Created by `pipx` on 2022-04-08 18:31:14
 export PATH="$PATH:/Users/kev-geosite/.local/bin"
 # eval "$(pyenv init -)"
@@ -121,3 +125,4 @@ export GOBIN="/Users/kevintly1/go/bin"
 export GOPATH="/Users/kevintly1/go"
 export PATH="$PATH:/Users/kevintly1/go/bin"
 export OPENAI_API_KEY="op://dev/ChatGPT API Key/credential"
+alias air='$(go env GOPATH)/bin/air'
