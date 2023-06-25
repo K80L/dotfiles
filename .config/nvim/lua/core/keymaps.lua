@@ -27,7 +27,13 @@ vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true
 
-vim.keymap.set('n', '<leader>h', ':noh<CR>')
+-- splitting behavior
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+---- remaps ----
+-- clear highlight
+vim.keymap.set('n', '<leader>n', ':noh<CR>')
 
 -- remove w key from split navigation
 vim.keymap.set('n', '<C-h>', '<C-w>h')
@@ -39,5 +45,3 @@ vim.keymap.set('n', '<silent> <A-Left>', ':vertical resize -3<CR>')
 vim.keymap.set('n', '<silent> <A-Right>', ':vertical resize +3<CR>')
 vim.keymap.set('n', '<silent> <A-Up>', ':resize +3<CR>')
 vim.keymap.set('n', '<silent> <A-Down>', ':resize -3<CR>')
-
-
