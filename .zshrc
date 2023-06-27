@@ -75,10 +75,13 @@ alias oldvim="vim"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias vpn="newrelic-chi-vpn connect full"
 alias testff="npm run e2e -- -b firefox"
+alias tf="terraform"
+alias lg0="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
+alias python="python3"
 
 export PATH=/opt/homebrew/bin:$PATH
 
-PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 export PATH=~/.npm-global/bin:$PATH
 
@@ -98,6 +101,10 @@ activatenvim() {
     source ~/.local/venv/nvim/bin/activate 
 }
 
+export EDITOR='/opt/homebrew/bin/nvim'
+
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
 # Created by `pipx` on 2022-04-08 18:31:14
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
@@ -130,6 +137,13 @@ export NVM_DIR="$HOME/.nvm"
 # add-zsh-hook chpwd load-nvmrc
 # load-nvmrc
 
+export HOMEBREW_ARTIFACTORY_TOKEN="op://nr/JFrog Identity Token/token"
 
 # starship
 eval "$(starship init zsh)"
+
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+export OPENAI_API_KEY="op://dev/ChatGPT API Key/credential"

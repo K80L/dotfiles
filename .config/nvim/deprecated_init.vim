@@ -5,6 +5,11 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
+" if exists('g:vscode')
+"     " VSCode extension
+" else
+"     " ordinary neovim
+" endif
 
 " DEFAULT SETTINGS
 set hidden 
@@ -50,29 +55,27 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
-
 let g:NERDTreeGitStatusWithFlags = 1
-let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
+let g:NERDTreeGitStatusNodeColorization = 1
 
+" let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
 
-
-au BufNewFile,BufRead *.py
-    \| set tabstop=4
-    \| set softtabstop=4
-    \| set shiftwidth=4
-    \| set textwidth=79
-    \| set expandtab
-    \| set autoindent
-    \| set fileformat=unix
-
-" au BufNewFile,BufRead *.js,*.ts,*.html,*.css,*.jsx,*.tsx
-"     \| set tabstop=2
-"     \| set softtabstop=2
-"     \| set shiftwidth=2
-
-
-au FileType python let b:coc_root_patterns = ['.git', '.env']
-
+" TrueColor support
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -89,7 +92,8 @@ let g:coc_global_extensions = [
     \ 'coc-html',
     \ 'coc-json',
     \ 'coc-prettier',
-    \ 'coc-word']
+    \ 'coc-word',
+    \ 'coc-graphql',]
 
 " Prettier Maybe we don't want this...
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
@@ -131,17 +135,23 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 " Plugin options
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
+" Devicons
+Plug 'kyazdani42/nvim-web-devicons'
+
 " NerdTree
 Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'tsony-tsonev/nerdtree-git-plugin'
-
+            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+            \ Plug 'ryanoasis/vim-devicons'
 " Telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+" Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" Optional for telescope
+Plug 'sharkdp/fd'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-tree/nvim-web-devicons'
 
 " autoclosing tags
 Plug 'alvan/vim-closetag'
@@ -166,13 +176,6 @@ Plug 'luisiacc/gruvbox-baby'
 " for live grep
 Plug 'BurntSushi/ripgrep'
 
-" Optional for telescope
-Plug 'sharkdp/fd'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-" Devicons
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'ryanoasis/vim-devicons'
 " Fugitive
 Plug 'tpope/vim-fugitive'
 
@@ -191,11 +194,35 @@ Plug 'heavenshell/vim-jsdoc', {
   \ 'do': 'make install'
 \}
 
+" Terraform Vim Plugin
+Plug 'hashivim/vim-terraform'
+
+
+" Swap windows <leader>ww
+Plug 'wesQ3/vim-windowswap'
+
+" ChatGPT
+Plug 'jackMort/ChatGPT.nvim'
+
+" See diffs in vim while coding
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'tag': 'legacy' }
+endif
+
+" GraphQL
+Plug 'jparise/vim-graphql'
+
+" Test runner (Jest, Playwrite, etc...)
+Plug 'vim-test/vim-test'
+
 "" Initialize plugin system
 call plug#end()
-" #######################################################################################################################################3
+" #######################################################################################################################################
 
-
+" vim-signify async update
+set updatetime=100
 
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
@@ -234,7 +261,7 @@ let g:closetag_close_shortcut = '<leader>>'
 
 
 set splitbelow splitright
-set background=dark
+" set background=dark
 set t_Co=256
 " colorscheme onedark
 colorscheme gruvbox
@@ -401,6 +428,9 @@ nnoremap <leader>p "+p
 function Null(error, response) abort
 endfunction
 
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+
 " skeletons :read ~/.config/nvim/skeletons/react-typescript.tsx
 " autocmd BufNewFile *.tsx 0r ~/.config/nvim/skeletons/react-typescript.tsx
 
@@ -435,6 +465,9 @@ lua << EOF
 require('config')
 require('colorizer').setup()
 require('lualine').setup()
-  options = { theme = 'gruvbox' }
-require('telescope').setup{}
+require('telescope').setup({
+  defaults = {
+    theme = 'gruvbox'
+  }
+})
 EOF
