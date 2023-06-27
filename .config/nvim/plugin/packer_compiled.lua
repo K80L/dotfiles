@@ -114,10 +114,20 @@ _G.packer_plugins = {
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
+  ["mason-null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/mason-null-ls.nvim",
+    url = "https://github.com/jay-babu/mason-null-ls.nvim"
+  },
   ["mason.nvim"] = {
     loaded = true,
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -159,10 +169,30 @@ _G.packer_plugins = {
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-gh-line"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/vim-gh-line",
+    url = "https://github.com/ruanyl/vim-gh-line"
+  },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
+  },
   ["vim-test"] = {
     loaded = true,
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/vim-test",
     url = "https://github.com/vim-test/vim-test"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 
