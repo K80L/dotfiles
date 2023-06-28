@@ -7,4 +7,5 @@ require("core.plugin_config.vim-test")
 require("core.plugin_config.autocompletions")
 require("core.plugin_config.lsp_config")
 require("core.plugin_config.null-ls")
-
+require("core.plugin_config.which-key")
+-- require("core.plugin_config.oil")
