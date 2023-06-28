@@ -94,6 +94,16 @@ _G.packer_plugins = {
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
+  fd = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/fd",
+    url = "https://github.com/sharkdp/fd"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -134,6 +144,11 @@ _G.packer_plugins = {
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -168,6 +183,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-closetag"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/vim-closetag",
+    url = "https://github.com/alvan/vim-closetag"
+  },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/Users/kevintly1/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
   },
   ["vim-fugitive"] = {
     loaded = true,
