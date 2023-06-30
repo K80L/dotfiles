@@ -74,7 +74,6 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-
 source ~/.cargo/env
 
 export PATH=/opt/homebrew/bin:$PATH
@@ -90,7 +89,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 alias vim="nvim"
 alias vi="nvim"
-alias oldvim="vim"io
+alias oldvim="vim"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export PATH=/usr/local/bin:$PATH
@@ -116,13 +115,11 @@ activatenvim() {
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
 
-# Created by `pipx` on 2022-04-08 18:31:14
-export PATH="$PATH:/Users/kev-geosite/.local/bin"
-# eval "$(pyenv init -)"
 export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 export GOBIN="/Users/kevintly1/go/bin"
 export GOPATH="/Users/kevintly1/go"
 export PATH="$PATH:/Users/kevintly1/go/bin"
+
 export OPENAI_API_KEY="op://dev/ChatGPT API Key/credential"
-alias air='$(go env GOPATH)/bin/air'
+alias air='$(go env GOBIN)/air'
