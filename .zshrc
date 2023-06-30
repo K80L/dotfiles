@@ -91,9 +91,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# eval $(thefuck --alias)
-
 export PATH=/usr/local/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
@@ -106,6 +103,7 @@ export EDITOR='/opt/homebrew/bin/nvim'
 
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
+
 # Created by `pipx` on 2022-04-08 18:31:14
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
