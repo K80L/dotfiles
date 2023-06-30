@@ -65,8 +65,10 @@ return require("packer").startup(function(use)
 
 	use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
-	-- autoclosing tags
+	-- autoclosing tags <>
 	use("alvan/vim-closetag")
+
+	use("jiangmiao/auto-pairs")
 
 	-- optional for telescope
 	use("sharkdp/fd")

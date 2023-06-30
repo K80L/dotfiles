@@ -33,7 +33,7 @@ vim.opt.splitright = true
 
 -- blinking cursor
 vim.opt.guicursor =
-[[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175]]
+	[[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175]]
 
 vim.opt.incsearch = true
 
@@ -63,3 +63,12 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
 vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {})
 vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+
+-- autoclose tags
+-- vim.keymap.set("i", '"<tab>', '""<Left>')
+-- vim.keymap.set("i", "'<tab>", "''<Left>")
+-- vim.keymap.set("i", "(<tab>", "()<Left>")
+-- vim.keymap.set("i", "[<tab>", "[]<Left>")
+-- vim.keymap.set("i", "{<tab>", "{}<Left>")
+-- vim.keymap.set("i", "{<CR>", "{<CR>}<ESC>0")
+-- vim.keymap.set("i", "{;<CR>", "{<CR>};<ESC>0")
