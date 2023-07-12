@@ -146,3 +146,5 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
 export OPENAI_API_KEY="op://dev/ChatGPT API Key/credential"
+
+export PATH=$PATH:~/.docker/bin
