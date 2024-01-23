@@ -77,6 +77,9 @@ return require("packer").startup(function(use)
 
 	use("mg979/vim-visual-multi")
 
+	-- easily navigate between vim and tmux panes
+	use("christoomey/vim-tmux-navigator")
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if packer_bootstrap then

@@ -77,7 +77,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias vpn="newrelic-chi-vpn connect full"
 alias testff="npm run e2e -- -b firefox"
 alias tf="terraform"
-alias lg0="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
+alias lg0="git log --graph --abbrev-commit --decorate --all"
 alias python="python3"
 
 export PATH=/opt/homebrew/bin:$PATH
@@ -141,6 +141,9 @@ export HOMEBREW_ARTIFACTORY_TOKEN="op://nr/JFrog Identity Token/token"
 # starship
 eval "$(starship init zsh)"
 
+# thefuck
+eval $(thefuck --alias)
+
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
@@ -148,3 +151,8 @@ export PATH=$PATH:$GOBIN
 export OPENAI_API_KEY="op://dev/ChatGPT API Key/credential"
 
 export PATH=$PATH:~/.docker/bin
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+function loginvault() {
+  echo `newrelic-vault us login -method=okta username=$USER totp=$1`
+}

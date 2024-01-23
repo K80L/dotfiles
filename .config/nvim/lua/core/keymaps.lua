@@ -46,11 +46,12 @@ vim.opt.updatetime = 50
 vim.keymap.set("n", "<leader>n", ":noh<CR>")
 
 -- remove w key from split navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
+-- vim.keymap.set("n", "<C-h>", "<C-w>h")
+-- vim.keymap.set("n", "<C-j>", "<C-w>j")
+-- vim.keymap.set("n", "<C-k>", "<C-w>k")
+-- vim.keymap.set("n", "<C-l>", "<C-w>l")
 
+-- resizing splits
 vim.keymap.set("n", "<A-Up>", ":resize +2<CR>", { silent = true })
 vim.keymap.set("n", "<A-Down>", ":resize -2<CR>", { silent = true })
 vim.keymap.set("n", "<A-Left>", ":vertical resize -2<CR>", { silent = true })
@@ -63,12 +64,6 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
 vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {})
 vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, {})
 
--- autoclose tags
--- vim.keymap.set("i", '"<tab>', '""<Left>')
--- vim.keymap.set("i", "'<tab>", "''<Left>")
--- vim.keymap.set("i", "(<tab>", "()<Left>")
--- vim.keymap.set("i", "[<tab>", "[]<Left>")
--- vim.keymap.set("i", "{<tab>", "{}<Left>")
--- vim.keymap.set("i", "{<CR>", "{<CR>}<ESC>0")
--- vim.keymap.set("i", "{;<CR>", "{<CR>};<ESC>0")
+vim.keymap.set("v", "<leader>l", "yoconsole.log('<ESC>pa: ', <ESC>pa)", { silent = true })
